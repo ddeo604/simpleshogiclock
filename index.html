@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<main>
+	<div id="clock">
+	<div class="wrapper">
+		
+		<div class="inverter">
+			
+			<button class="p1"  id="p1">Start</button>
+			
+		</div>
+		<div class="rotater">
+		<div class="gap"></div>
+		<div class="title"> <h1>Shogi Clock</h1> </div>
+		<div class="gap"></div>
+			<div class="time">
+			<div class="pt1" id="pt1"><span id="pm1">15</span>:<span id="ps1">00</span> </div>
+			<div class="vgap"></div>
+			<div class="pt2" id="pt2"><span id="pm2">15</span>:<span id="ps2">00</span> </div>
+			</div>
+			<div class="gap"></div>
+		<div class="flex"><button>RESET</button><button>BUTTON</button><button id="btnsettings">SETTINGS</button></div>
+		</div>
+		
+		<button class="p2" id="p2">Start</button>
+		
+	</div>
+	
+	</div>
+	<div id="settings">
+		<h1>Mode</h1>
+		<input type="radio" id="standard" name="mode" value="standard"> <label>Standard</label>
+		<input type="radio" id="increment" name="mode" value="increment"> <label>Increment</label>
+		<div class="border">
+			<div id="st">Starting Time:</div>
+			<div><button id="sstup"> up </button>
+			
+			<div><span id="sst">15</span></div>
+			
+			<button id="sstdown"> down </button>  </div>
+		</div>
+		<div class="border">
+			<div id="bvi">Byomi:</div>
+			<div><button id="bviup"> up </button>
+			<div><span id="sbvi">15</span></div>
+			
+			<button id="bvidown"> down </button>  </div>
+			
+		</div>
+		
+		<button id="save"> SAVE </button>
+	</div>
+	
+	
+	<script src="script.js"></script>
+	</main>
+</body>
+
+</html>

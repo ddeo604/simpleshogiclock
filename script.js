@@ -295,7 +295,7 @@ btnbviup.addEventListener("click", bviup);
 btnbvidown.addEventListener("click", bvidown);
 
 function sstup(){
-	game.settings.startingtime += 60;
+	game.settings.startingtime += 300;
 	var temp1 = format(Math.floor(game.settings.startingtime / 60));
 	var temp2 = format(Math.floor(game.settings.startingtime % 60));
 	settingstartingtime.innerHTML = temp1 + ":" + temp2;
@@ -304,7 +304,7 @@ function sstup(){
 
 function sstdown(){
 	if (game.settings.startingtime > 0){
-		game.settings.startingtime -= 60;
+		game.settings.startingtime -= 300;
 		var temp1 = format(Math.floor(game.settings.startingtime / 60));
 		var temp2 = format(Math.floor(game.settings.startingtime % 60));
 		settingstartingtime.innerHTML = temp1 + ":" + temp2;

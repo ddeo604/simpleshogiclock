@@ -79,6 +79,7 @@ h1 {
 	top: 25%;
 	width: inherit;
 	margin: 0;
+	font-size: 15vw;
 }
 
 
@@ -115,7 +116,8 @@ h1 {
 
 .pt {
 	position: relative;
-	top: 35%;
+	top: 25%;
+	font-size: 20vw;
 }
 
 
@@ -123,13 +125,18 @@ h1 {
 
 
 
-#sstup, #sstdown, #bviup, #bvidown, #save {
+#sstup, #sstdown, #bviup, #bvidown {
 	width: 100vw;
 	font-weight: bold;
+	height: 4vh;
+	font-size: 2.5vh;
 }
 
 #save {
+	width: 100vw;
+	font-weight: bold;
 	height: 15vh;
+	font-size: 5vh;
 }
 
 .border {
@@ -152,4 +159,8 @@ h1 {
 
 #settings, #clock {
 	width: 100vw;
+}
+
+#settings {
+	font-size: 4vh;
 }

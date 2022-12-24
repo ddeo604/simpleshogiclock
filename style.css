@@ -85,9 +85,10 @@ h1 {
 
 
 .clockbtn {
-	width: 20vh;
+	width: 25vh;
 	height: 10vw;
 	font-weight: bold;
+	font-size: 6vw;
 }
 
 
@@ -105,8 +106,8 @@ h1 {
 
 .pbutton {
 	width: 100vw;
-	height: 15vh;
-	font-size: 30px;
+	height: 10vh;
+	font-size: 8vh;
 	font-weight: bold;
 }
 
@@ -147,7 +148,6 @@ h1 {
 
 
 #sst, #sbvi {
-	font-size: 40px;
 	text-align: center;
 	display: block;
 }
@@ -163,4 +163,9 @@ h1 {
 
 #settings {
 	font-size: 4vh;
+}
+
+input[type=radio] {
+    border: 0;
+    height: 2.5vw;
 }

@@ -1,5 +1,5 @@
-var p1 = document.getElementById("p1");
-var p2 = document.getElementById("p2");
+var p2 = document.getElementById("p1");
+var p1 = document.getElementById("p2");
 var pt1 = document.getElementById("pt1");
 var pt2 = document.getElementById("pt2");
 var pm1 = document.getElementById("pm1");
@@ -18,13 +18,18 @@ var bvi = document.getElementById("bvi");
 sta.addEventListener("click", selectsta);
 inc.addEventListener("click", selectinc);
 
+var radiostandard = document.getElementById("standard");
+var radioincrement = document.getElementById("increment");
+
+
 
 
 var game = {};
 game.started = false;
 game.end = false;
 
-var time1 = {};
+time1 = {};
+console.log(time1);
 var time2 = {};
 
 game.settings = {};
@@ -34,26 +39,86 @@ game.settings.bvi = 10;
 
 
 
+function setup(seconds, bvi){
+	min = Math.floor(seconds / 60);
+	sec = Math.floor(seconds % 60);
+	
+	pt1.style.color = "black";
+	pt2.style.color = "black";
+	
+	if(radiostandard.checked){
+		console.log("standard");
+		game.settings.mode = "standard";
+	}else if (radioincrement.checked){
+		game.settings.mode = "increment";
+	}
+	
+	time1.time = seconds;
+	time2.time = seconds;
+	
+	
+	if (game.settings.mode == "standard"){
+		game.settings.bvi = bvi;
+		if(game.settings.startingtime == 0){
+			time1.byomi = true;
+			time2.byomi = true;
+	
+			time1.time = game.settings.bvi;
+			time2.time = game.settings.bvi;
+			pt1.style.color = "darkorange";
+			pt2.style.color = "darkorange";
+		}
+	}else if(game.settings.mode == "increment"){
+		game.settings.increment = bvi;
+		time1.byomi = false;
+		time2.byomi = false;
+		if(game.settings.startingtime == 0){
+			time1.time = game.settings.bvi;
+			time2.time = game.settings.bvi;
+		}
+	}
+	
+	
+	pm1.innerHTML = format(Math.floor(time1.time / 60));
+	ps1.innerHTML = format(Math.floor(time1.time % 60));
+	pm2.innerHTML = format(Math.floor(time2.time / 60));
+	ps2.innerHTML = format(Math.floor(time2.time % 60));
+	
+}
 
 
 
 function player1click(){
 	if (game.started == false && game.end == false){
 		game.started = true;
-		game.turn = 1;
+		game.turn = 2;
+		
+		time2.interval = setInterval(countdown2, 1000);
+		clearInterval(time1.interval);
+		
+		p1.innerHTML = "";
+		p2.innerHTML = "End Turn";
 	}
 	if (game.turn == 1 && game.end == false){
-		console.log("clicked2");
+		console.log("this is click1");
 		game.turn = 2
 		p1.innerHTML = "";
 		p2.innerHTML = "End Turn";
-		if(time1.byomi == true){
+		console.log(time1.byomi);
+		if(time1.byomi == true && game.settings.mode == "standard"){
+			console.log("wentthroughhere");
 			time1.time = game.settings.bvi;
+			pm1.innerHTML = format(Math.floor(time1.time / 60));
+			ps1.innerHTML = format(Math.floor(time1.time % 60));
+		}
+		if(game.settings.mode == "increment"){
+			time1.time += game.settings.bvi;
 			pm1.innerHTML = format(Math.floor(time1.time / 60));
 			ps1.innerHTML = format(Math.floor(time1.time % 60));
 		}
 		time2.interval = setInterval(countdown2, 1000);
 		clearInterval(time1.interval);
+		console.log(time1.interval);
 	}
 }
 
@@ -62,15 +127,27 @@ function player1click(){
 function player2click(){
 	if (game.started == false && game.end == false){
 		game.started = true;
-		game.turn = 2;
+		game.turn = 1;
+		
+		time1.interval = setInterval(countdown1, 1000);
+		clearInterval(time2.interval);
+		
+		p2.innerHTML = "";
+		p1.innerHTML = "End Turn";
 	}
 	if (game.turn == 2 && game.end == false){
 		console.log("clicked2");
 		game.turn = 1
 		p2.innerHTML = "";
 		p1.innerHTML = "End Turn";
-		if(time2.byomi == true){
+		if(time2.byomi == true && game.settings.mode == "standard"){
+			console.log(game.settings.bvi);
 			time2.time = game.settings.bvi;
+			pm2.innerHTML = format(Math.floor(time2.time / 60));
+			ps2.innerHTML = format(Math.floor(time2.time % 60));
+		}
+		if(game.settings.mode == "increment"){
+			time2.time += game.settings.bvi;
 			pm2.innerHTML = format(Math.floor(time2.time / 60));
 			ps2.innerHTML = format(Math.floor(time2.time % 60));
 		}
@@ -89,15 +166,20 @@ function countdown1(){
 		
 	}
 	if(time1.time == 0){
-			if(time1.byomi == true){
+			if (game.settings.mode == "standard"){
+				if(time1.byomi == true){
+					game.end = true;
+					pt1.style.color = "red";					
+				}else{
+					pt1.style.color = "darkorange";
+					time1.time = game.settings.bvi;
+					time1.byomi = true;
+				}
+			}else if (game.settings.mode == "increment"){
 				game.end = true;
 				pt1.style.color = "red";
-			}else {
-				pt1.style.color = "darkorange";
-				time1.byomi = true;
-				time1.time = game.settings.bvi;
 			}
-		}
+	}
 	pm1.innerHTML = format(Math.floor(time1.time / 60));
 	ps1.innerHTML = format(Math.floor(time1.time % 60));
 }
@@ -111,15 +193,20 @@ function countdown2(){
 		
 	}
 	if(time2.time == 0){
-			if(time2.byomi == true){
+			if (game.settings.mode == "standard"){
+				if(time2.byomi == true){
+					game.end = true;
+					pt2.style.color = "red";					
+				}else{
+					pt2.style.color = "darkorange";
+					time2.time = game.settings.bvi;
+					time2.byomi = true;
+				}
+			}else if (game.settings.mode == "increment"){
 				game.end = true;
 				pt2.style.color = "red";
-			}else {
-				pt2.style.color = "darkorange";
-				time2.byomi = true;
-				time2.time = game.settings.bvi;
 			}
-		}
+	}
 	pm2.innerHTML = format(Math.floor(time2.time / 60));
 	ps2.innerHTML = format(Math.floor(time2.time % 60));
 }
@@ -132,29 +219,6 @@ function format(x){
 }
 
 
-function setup(seconds, bvi, byomi){
-	min = Math.floor(seconds / 60);
-	sec = Math.floor(seconds % 60);
-	
-	if (byomi == "standard"){
-		game.byomi = true;
-		game.settings.bvi = bvi;
-	}else{
-		game.byomi = false;
-		game.settings.increment = bvi;
-	}
-	
-	time1.time = seconds;
-	time1.byomi = false;
-	time2.time = seconds;
-	time2.byomi = false;
-	
-	pm1.innerHTML = format(Math.floor(time1.time / 60));
-	ps1.innerHTML = format(Math.floor(time1.time % 60));
-	pm2.innerHTML = format(Math.floor(time2.time / 60));
-	ps2.innerHTML = format(Math.floor(time2.time % 60));
-	
-}
 
 
 var clock = document.getElementById("clock");
@@ -187,6 +251,7 @@ var settingstartingtime = document.getElementById("sst");
 var settingbvi = document.getElementById("sbvi");
 
 function gotosettings(){
+	console.log("test");
 	var temp1 = format(Math.floor(game.settings.startingtime / 60));
 	var temp2 = format(Math.floor(game.settings.startingtime % 60));
 	settingstartingtime.innerHTML = temp1 + ":" + temp2;
@@ -194,13 +259,15 @@ function gotosettings(){
 	var temp4 = format(Math.floor(game.settings.bvi % 60));
 	settingbvi.innerHTML = temp3 + ":" + temp4;
 	
+	clearInterval(time1.interval);
+	clearInterval(time2.interval);
 	
 	show(settings);
 }
 
 function gotoclock(){
 	
-	setup(game.settings.startingtime, game.settings.bvi, game.settings.mode);
+	setup(game.settings.startingtime, game.settings.bvi);
 	clearInterval(time1.interval);
 	clearInterval(time2.interval);
 	
@@ -210,6 +277,8 @@ function gotoclock(){
 	game.started = false;
 	game.end = false;
 	
+	console.log("valies");
+	console.log(time1);
 	show(clock);
 	
 }

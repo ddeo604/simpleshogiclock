@@ -11,30 +11,33 @@
 		
 		<div class="inverter">
 			
-			<button class="p1"  id="p1">Start</button>
+			<button class="pbutton"  id="p1">Start</button>
 			
 		</div>
+		<div id="hg">
 		<div class="rotater">
 		<div class="gap"></div>
 		<div class="title"> <h1>Shogi Clock</h1> </div>
 		<div class="gap"></div>
 			<div class="time">
-			<div class="pt1" id="pt1"><span id="pm1">15</span>:<span id="ps1">00</span> </div>
+			<div class="pt" id="pt1"><span id="pm1">15</span>:<span id="ps1">00</span> </div>
 			<div class="vgap"></div>
-			<div class="pt2" id="pt2"><span id="pm2">15</span>:<span id="ps2">00</span> </div>
+			<div class="pt" id="pt2"><span id="pm2">15</span>:<span id="ps2">00</span> </div>
 			</div>
 			<div class="gap"></div>
-		<div class="flex"><button>RESET</button><button>BUTTON</button><button id="btnsettings">SETTINGS</button></div>
+		<div class="flex blackbg"><button class="clockbtn" id="btnsettings">SETTINGS</button></div>
+			<div class="gap"></div>
 		</div>
-		
-		<button class="p2" id="p2">Start</button>
+		</div>
+		<button class="pbutton" id="p2">Start</button>
 		
 	</div>
 	
 	</div>
 	<div id="settings">
-		<h1>Mode</h1>
-		<input type="radio" id="standard" name="mode" value="standard"> <label>Standard</label>
+		<h1>Settings</h1>
+		<span>Mode:</span>
+		<input type="radio" id="standard" name="mode" value="standard" checked> <label>Standard</label>
 		<input type="radio" id="increment" name="mode" value="increment"> <label>Increment</label>
 		<div class="border">
 			<div id="st">Starting Time:</div>
@@ -53,7 +56,7 @@
 			
 		</div>
 		
-		<button id="save"> SAVE </button>
+		<button id="save"> Go to Clock </button>
 	</div>
 	
 	
